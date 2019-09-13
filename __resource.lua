@@ -1,4 +1,4 @@
-resource_manifest_version '036cc35d-d707-4d30-a23e-b08fd9b0f46b'
+resource_manifest_version '44febabe-d386-4d18-afbe-5e627f4af937'
 
 description 'ESX Hifi'
 
