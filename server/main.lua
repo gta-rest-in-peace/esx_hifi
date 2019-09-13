@@ -1,7 +1,4 @@
 ESX = nil
-local playersProcessingCannabis = {}
-local playersProcessingCoca = {}
-local playersProcessingMeth = {}
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
