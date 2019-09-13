@@ -32,6 +32,9 @@ end)
 
 RegisterNetEvent('esx_hifi:place_hifi')
 AddEventHandler('esx_hifi:place_hifi', function()
+    startAnimation("anim@heists@money_grab@briefcase","put_down_case")
+    Citizen.Wait(1000)
+    ClearPedTasks(PlayerPedId())
     TriggerEvent('esx:spawnObject', 'prop_boombox_01')
 end)
 
@@ -109,7 +112,8 @@ function OpenhifiMenu()
                 NetworkRequestControlOfEntity(currentData)
                 menu.close()
                 menuOpen = false
-                Citizen.Wait(500)
+                startAnimation("anim@heists@narcotics@trash","pickup")
+                Citizen.Wait(700)
                 SetEntityAsMissionEntity(currentData,false,true)
                 DeleteEntity(currentData)
                 ESX.Game.DeleteObject(currentData)
@@ -117,6 +121,8 @@ function OpenhifiMenu()
                     TriggerServerEvent('esx_hifi:remove_hifi', lCoords)
                     currentData = nil
                 end
+                Citizen.Wait(500)
+                ClearPedTasks(PlayerPedId())
             else
                 menu.close()
                 menuOpen = false
@@ -218,3 +224,9 @@ Citizen.CreateThread(function()
         end
     end
 end)
+
+function startAnimation(lib,anim)
+    ESX.Streaming.RequestAnimDict(lib, function()
+        TaskPlayAnim(PlayerPedId(), lib, anim, 8.0, -8.0, -1, 1, 0, false, false, false)
+    end)
+end
