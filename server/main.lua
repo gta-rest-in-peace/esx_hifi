@@ -8,13 +8,13 @@ ESX.RegisterUsableItem('hifi', function(source)
 	xPlayer.removeInventoryItem('hifi', 1)
 	
 	TriggerClientEvent('esx_hifi:place_hifi', source)
-	TriggerClientEvent('esx:showNotification', source, _U('put_hifi'))
+	xPlayer.showNotification(_U('put_hifi'))
 end)
 
 RegisterServerEvent('esx_hifi:remove_hifi')
 AddEventHandler('esx_hifi:remove_hifi', function(coords)
 	local xPlayer = ESX.GetPlayerFromId(source)
-	if xPlayer.getInventoryItem('hifi').count < xPlayer.getInventoryItem('hifi').limit then
+	if xPlayer.canCarryItem('hifi', 1) then
 		xPlayer.addInventoryItem('hifi', 1)
 	end
 	TriggerClientEvent('esx_hifi:stop_music', -1, coords)
